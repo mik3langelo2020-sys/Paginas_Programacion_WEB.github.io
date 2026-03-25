@@ -1,0 +1,187 @@
+/* Index - Estilos específicos */
+body {
+    background-image: url(fondo_pagina.jpg);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.index-container {
+    max-width: 600px;
+    width: 100%;
+}
+
+.index-header {
+    text-align: center;
+    margin-bottom: 50px;
+    color: white;
+}
+
+.index-header h1 {
+    font-size: 3em;
+    margin: 0 0 10px 0;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.index-header p {
+    font-size: 1.2em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* Grid de botones */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 600px) {
+    .buttons-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Botones animados */
+.btn-card {
+    text-decoration: none;
+    color: white;
+    padding: 40px 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    min-height: 200px;
+    font-weight: 600;
+}
+
+/* Pseudoelemento para efecto */
+.btn-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.5s ease;
+    z-index: 1;
+}
+
+.btn-card:hover::before {
+    left: 100%;
+}
+
+.btn-card-content {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-card-title {
+    font-size: 1.5em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.btn-card-desc {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+/* Botón 1 - Portafolio HTML y CSS */
+.btn-portafolio {
+    background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-oscuro) 100%);
+}
+
+.btn-portafolio:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+}
+
+/* Botón 2 - Portafolio HTML Puro */
+.btn-puro {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-puro:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Botón 3 - Formulario */
+.btn-formulario {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+}
+
+.btn-formulario:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(39, 174, 96, 0.4);
+}
+
+/* Icono emoji */
+.btn-icon {
+    font-size: 2.5em;
+    animation: float 3s ease-in-out infinite;
+}
+
+.btn-card:hover .btn-icon {
+    animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* Footer */
+.index-footer {
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    font-size: 0.9em;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .index-header h1 {
+        font-size: 2em;
+    }
+
+    .btn-card {
+        min-height: 150px;
+        padding: 30px 15px;
+    }
+
+    .btn-card-title {
+        font-size: 1.2em;
+    }
+
+    .btn-icon {
+        font-size: 2em;
+    }
+}
