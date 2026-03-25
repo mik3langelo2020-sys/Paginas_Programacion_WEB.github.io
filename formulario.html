@@ -111,6 +111,16 @@
             color: var(--gris-oscuro);
         }
 
+        select.input-form {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bdc3c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 20px;
+            padding-right: 35px;
+        }
+
         /* Checkbox */
         .checkbox {
             flex-direction: row;
@@ -237,8 +247,8 @@
     <div class="container-formulario">
         <div class="form-wrapper">
             <div class="form-header">
-                <h1 class="titulo-form">Crear Cuenta</h1>
-                <p class="subtitulo-form">Únete a nosotros hoy</p>
+                <h1 class="titulo-form">Información Personal</h1>
+                <p class="subtitulo-form">Completa tu perfil</p>
             </div>
 
             <form class="formulario" method="POST" action="#" novalidate>
@@ -250,6 +260,13 @@
                     <span class="error-message" id="error-nombre"></span>
                 </div>
 
+                <!-- Cédula -->
+                <div class="form-group">
+                    <label for="cedula" class="label-form">Cédula de Identidad</label>
+                    <input type="text" id="cedula" name="cedula" class="input-form" placeholder="Ej: 1019991459" required>
+                    <span class="error-message" id="error-cedula"></span>
+                </div>
+
                 <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="label-form">Correo Electrónico</label>
@@ -257,43 +274,62 @@
                     <span class="error-message" id="error-email"></span>
                 </div>
 
-                <!-- Usuario -->
+                <!-- Teléfono -->
                 <div class="form-group">
-                    <label for="usuario" class="label-form">Usuario</label>
-                    <input type="text" id="usuario" name="usuario" class="input-form" placeholder="Elige un nombre de usuario" required>
-                    <span class="error-message" id="error-usuario"></span>
+                    <label for="telefono" class="label-form">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" class="input-form" placeholder="3133300586" required>
+                    <span class="error-message" id="error-telefono"></span>
                 </div>
 
-                <!-- Contraseña -->
+                <!-- Dirección -->
                 <div class="form-group">
-                    <label for="password" class="label-form">Contraseña</label>
-                    <input type="password" id="password" name="password" class="input-form" placeholder="Mínimo 6 caracteres" required>
-                    <span class="error-message" id="error-password"></span>
+                    <label for="direccion" class="label-form">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" class="input-form" placeholder="Calle y número" required>
+                    <span class="error-message" id="error-direccion"></span>
                 </div>
 
-                <!-- Confirmar Contraseña -->
+                <!-- Ciudad -->
                 <div class="form-group">
-                    <label for="confirm-password" class="label-form">Confirmar Contraseña</label>
-                    <input type="password" id="confirm-password" name="confirm-password" class="input-form" placeholder="Repite tu contraseña" required>
-                    <span class="error-message" id="error-confirm"></span>
+                    <label for="ciudad" class="label-form">Ciudad</label>
+                    <input type="text" id="ciudad" name="ciudad" class="input-form" placeholder="Tu ciudad" required>
+                    <span class="error-message" id="error-ciudad"></span>
+                </div>
+
+                <!-- Fecha de Nacimiento -->
+                <div class="form-group">
+                    <label for="fecha" class="label-form">Fecha de Nacimiento</label>
+                    <input type="date" id="fecha" name="fecha" class="input-form" required>
+                    <span class="error-message" id="error-fecha"></span>
+                </div>
+
+                <!-- Género -->
+                <div class="form-group">
+                    <label for="genero" class="label-form">Género</label>
+                    <select id="genero" name="genero" class="input-form" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                    <span class="error-message" id="error-genero"></span>
                 </div>
 
                 <!-- Checkbox Términos -->
                 <div class="form-group checkbox">
                     <input type="checkbox" id="terminos" name="terminos" required>
-                    <label for="terminos" class="label-checkbox">Acepto los términos y condiciones</label>
+                    <label for="terminos" class="label-checkbox">Confirmo que la información es correcta</label>
                     <span class="error-message" id="error-terminos"></span>
                 </div>
 
                 <!-- Botones -->
                 <div class="form-buttons">
-                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <button type="submit" class="btn btn-primary">Enviar Información</button>
                     <button type="reset" class="btn btn-secondary">Limpiar</button>
                 </div>
 
                 <!-- Enlace a Login -->
                 <div class="form-footer">
-                    <p>¿Ya tienes cuenta? <a href="#" class="link-login">Inicia sesión aquí</a></p>
+                    <p>¿Necesitas ayuda? <a href="#" class="link-login">Contactanos aquí</a></p>
                 </div>
 
             </form>
@@ -305,10 +341,13 @@
             e.preventDefault();
             
             const nombre = document.getElementById('nombre').value.trim();
+            const cedula = document.getElementById('cedula').value.trim();
             const email = document.getElementById('email').value.trim();
-            const usuario = document.getElementById('usuario').value.trim();
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
+            const telefono = document.getElementById('telefono').value.trim();
+            const direccion = document.getElementById('direccion').value.trim();
+            const ciudad = document.getElementById('ciudad').value.trim();
+            const fecha = document.getElementById('fecha').value;
+            const genero = document.getElementById('genero').value;
             const terminos = document.getElementById('terminos').checked;
             
             let valido = true;
@@ -320,33 +359,48 @@
                 valido = false;
             }
 
+            if (cedula.length < 8) {
+                document.getElementById('error-cedula').textContent = 'Ingresa una cédula válida';
+                valido = false;
+            }
+
             if (!email.includes('@')) {
                 document.getElementById('error-email').textContent = 'Ingresa un correo válido';
                 valido = false;
             }
 
-            if (usuario.length < 3) {
-                document.getElementById('error-usuario').textContent = 'El usuario debe tener al menos 3 caracteres';
+            if (telefono.length < 10) {
+                document.getElementById('error-telefono').textContent = 'Ingresa un teléfono válido';
                 valido = false;
             }
 
-            if (password.length < 6) {
-                document.getElementById('error-password').textContent = 'La contraseña debe tener al menos 6 caracteres';
+            if (direccion.length < 5) {
+                document.getElementById('error-direccion').textContent = 'Ingresa una dirección válida';
                 valido = false;
             }
 
-            if (password !== confirmPassword) {
-                document.getElementById('error-confirm').textContent = 'Las contraseñas no coinciden';
+            if (ciudad.length < 3) {
+                document.getElementById('error-ciudad').textContent = 'Ingresa una ciudad válida';
+                valido = false;
+            }
+
+            if (!fecha) {
+                document.getElementById('error-fecha').textContent = 'Selecciona tu fecha de nacimiento';
+                valido = false;
+            }
+
+            if (!genero) {
+                document.getElementById('error-genero').textContent = 'Selecciona un género';
                 valido = false;
             }
 
             if (!terminos) {
-                document.getElementById('error-terminos').textContent = 'Debes aceptar los términos y condiciones';
+                document.getElementById('error-terminos').textContent = 'Debes confirmar que la información es correcta';
                 valido = false;
             }
 
             if (valido) {
-                alert('¡Registro exitoso! (Este es un formulario de demostración)');
+                alert('¡Información registrada exitosamente!');
                 this.reset();
             }
         });
