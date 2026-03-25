@@ -5,16 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro - Mi Aplicación</title>
     <link rel="stylesheet" href="styles_formulario.css">
+    <script src="js_formulario.js"></script>
 </head>
 <body>
     <div class="container-formulario">
         <div class="form-wrapper">
             <div class="form-header">
+                <a class="btn-volver" href="index.html">Volver</a>
                 <h1 class="titulo-form">Información Personal</h1>
                 <p class="subtitulo-form">Completa tu perfil</p>
             </div>
 
-            <form class="formulario" method="POST" action="#" novalidate>
+            <form class="formulario" id="formulario" method="POST" action="#" novalidate>
                 
                 <!-- Nombre Completo -->
                 <div class="form-group">
@@ -79,7 +81,6 @@
 
                 <!-- Checkbox Términos -->
                 <div class="form-group checkbox">
-                    <input type="checkbox" id="terminos" name="terminos" required>
                     <label for="terminos" class="label-checkbox">Confirmo que la información es correcta</label>
                     <span class="error-message" id="error-terminos"></span>
                 </div>
@@ -99,74 +100,5 @@
         </div>
     </div>
 
-    <script>
-        document.querySelector('.formulario').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nombre = document.getElementById('nombre').value.trim();
-            const cedula = document.getElementById('cedula').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const telefono = document.getElementById('telefono').value.trim();
-            const direccion = document.getElementById('direccion').value.trim();
-            const ciudad = document.getElementById('ciudad').value.trim();
-            const fecha = document.getElementById('fecha').value;
-            const genero = document.getElementById('genero').value;
-            const terminos = document.getElementById('terminos').checked;
-            
-            let valido = true;
-
-            document.querySelectorAll('.error-message').forEach(error => error.textContent = '');
-
-            if (nombre.length < 3) {
-                document.getElementById('error-nombre').textContent = 'El nombre debe tener al menos 3 caracteres';
-                valido = false;
-            }
-
-            if (cedula.length < 8) {
-                document.getElementById('error-cedula').textContent = 'Ingresa una cédula válida';
-                valido = false;
-            }
-
-            if (!email.includes('@')) {
-                document.getElementById('error-email').textContent = 'Ingresa un correo válido';
-                valido = false;
-            }
-
-            if (telefono.length < 10) {
-                document.getElementById('error-telefono').textContent = 'Ingresa un teléfono válido';
-                valido = false;
-            }
-
-            if (direccion.length < 5) {
-                document.getElementById('error-direccion').textContent = 'Ingresa una dirección válida';
-                valido = false;
-            }
-
-            if (ciudad.length < 3) {
-                document.getElementById('error-ciudad').textContent = 'Ingresa una ciudad válida';
-                valido = false;
-            }
-
-            if (!fecha) {
-                document.getElementById('error-fecha').textContent = 'Selecciona tu fecha de nacimiento';
-                valido = false;
-            }
-
-            if (!genero) {
-                document.getElementById('error-genero').textContent = 'Selecciona un género';
-                valido = false;
-            }
-
-            if (!terminos) {
-                document.getElementById('error-terminos').textContent = 'Debes confirmar que la información es correcta';
-                valido = false;
-            }
-
-            if (valido) {
-                alert('¡Información registrada exitosamente!');
-                this.reset();
-            }
-        });
-    </script>
 </body>
 </html>
