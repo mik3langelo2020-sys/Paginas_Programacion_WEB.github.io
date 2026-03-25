@@ -107,11 +107,13 @@ body {
 
 .btn-portafolio {
     background: linear-gradient(135deg, var(--dorado) 0%, var(--dorado-oscuro) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
 }
 
 .btn-portafolio:hover {
     transform: rotate(-5deg) translateY(-10px);
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 15px 40px rgba(209, 255, 43, 0.4);
     border-color: rgba(255, 255, 255, 0.6);
 }
 
@@ -136,12 +138,14 @@ body {
 
 .btn-formulario {
     background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
 }
 
 .btn-formulario:hover {
     transform: rotate(5deg) translateY(10px);
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 15px 40px rgba(102, 234, 106, 0.4);
+    border-color: rgba(255, 255, 255, 0.741);
 }
 
 .btn-formulario::before {
