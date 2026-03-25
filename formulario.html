@@ -1,22 +1,355 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Formulario</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Mi Aplicación</title>
+    <style>
+        /* Paleta de colores */
+        :root {
+            --dorado: #D4AF37;
+            --dorado-oscuro: #B8921B;
+            --texto-claro: #444444;
+            --blanco: #ffffff;
+            --error: #e74c3c;
+            --gris-claro: #ecf0f1;
+            --gris-oscuro: #bdc3c7;
+        }
+
+        /* Estilos generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Contenedor del formulario */
+        .container-formulario {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .form-wrapper {
+            background-color: var(--blanco);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header del formulario */
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .titulo-form {
+            color: var(--dorado);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo-form {
+            color: var(--gris-oscuro);
+            font-size: 0.95em;
+        }
+
+        /* Grupos de formulario */
+        .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label-form {
+            color: var(--texto-claro);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* Inputs */
+        .input-form {
+            padding: 12px 15px;
+            border: 2px solid var(--gris-claro);
+            border-radius: 8px;
+            font-size: 1em;
+            color: var(--texto-claro);
+            transition: all 0.3s ease;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .input-form:focus {
+            outline: none;
+            border-color: var(--dorado);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            background-color: rgba(212, 175, 55, 0.05);
+        }
+
+        .input-form::placeholder {
+            color: var(--gris-oscuro);
+        }
+
+        /* Checkbox */
+        .checkbox {
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            margin-right: 10px;
+            accent-color: var(--dorado);
+        }
+
+        .label-checkbox {
+            font-weight: normal;
+            font-size: 0.9em;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        /* Mensajes de error */
+        .error-message {
+            color: var(--error);
+            font-size: 0.85em;
+            margin-top: 5px;
+            min-height: 18px;
+        }
+
+        /* Botones */
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--dorado);
+            color: var(--blanco);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dorado-oscuro);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background-color: var(--gris-claro);
+            color: var(--texto-claro);
+            border: 2px solid var(--gris-oscuro);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--gris-oscuro);
+            color: var(--blanco);
+        }
+
+        /* Footer del formulario */
+        .form-footer {
+            text-align: center;
+            border-top: 1px solid var(--gris-claro);
+            padding-top: 15px;
+        }
+
+        .form-footer p {
+            color: var(--texto-claro);
+            font-size: 0.95em;
+            margin: 0;
+        }
+
+        .link-login {
+            color: var(--dorado);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .link-login:hover {
+            color: var(--dorado-oscuro);
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .form-wrapper {
+                padding: 25px 20px;
+            }
+
+            .titulo-form {
+                font-size: 1.7em;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h2>Formulario de Contacto</h2>
-  <form method="post">
-    
-    <label for="nombre">Nombre:</label><br>
-    <input type="text" id="nombre" name="nombre" required><br><br>
-    
-    <label for="email">Correo electrónico:</label><br>
-    <input type="email" id="email" name="email" required><br><br>
-    
-    <input type="submit" value="Enviar">
-    <input type="reset" value="Limpiar">
-    
-  </form>
+    <div class="container-formulario">
+        <div class="form-wrapper">
+            <div class="form-header">
+                <h1 class="titulo-form">Crear Cuenta</h1>
+                <p class="subtitulo-form">Únete a nosotros hoy</p>
+            </div>
+
+            <form class="formulario" method="POST" action="#" novalidate>
+                
+                <!-- Nombre Completo -->
+                <div class="form-group">
+                    <label for="nombre" class="label-form">Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" class="input-form" placeholder="Tu nombre completo" required>
+                    <span class="error-message" id="error-nombre"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="label-form">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" class="input-form" placeholder="tu@email.com" required>
+                    <span class="error-message" id="error-email"></span>
+                </div>
+
+                <!-- Usuario -->
+                <div class="form-group">
+                    <label for="usuario" class="label-form">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" class="input-form" placeholder="Elige un nombre de usuario" required>
+                    <span class="error-message" id="error-usuario"></span>
+                </div>
+
+                <!-- Contraseña -->
+                <div class="form-group">
+                    <label for="password" class="label-form">Contraseña</label>
+                    <input type="password" id="password" name="password" class="input-form" placeholder="Mínimo 6 caracteres" required>
+                    <span class="error-message" id="error-password"></span>
+                </div>
+
+                <!-- Confirmar Contraseña -->
+                <div class="form-group">
+                    <label for="confirm-password" class="label-form">Confirmar Contraseña</label>
+                    <input type="password" id="confirm-password" name="confirm-password" class="input-form" placeholder="Repite tu contraseña" required>
+                    <span class="error-message" id="error-confirm"></span>
+                </div>
+
+                <!-- Checkbox Términos -->
+                <div class="form-group checkbox">
+                    <input type="checkbox" id="terminos" name="terminos" required>
+                    <label for="terminos" class="label-checkbox">Acepto los términos y condiciones</label>
+                    <span class="error-message" id="error-terminos"></span>
+                </div>
+
+                <!-- Botones -->
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+
+                <!-- Enlace a Login -->
+                <div class="form-footer">
+                    <p>¿Ya tienes cuenta? <a href="#" class="link-login">Inicia sesión aquí</a></p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('.formulario').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const usuario = document.getElementById('usuario').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const terminos = document.getElementById('terminos').checked;
+            
+            let valido = true;
+
+            document.querySelectorAll('.error-message').forEach(error => error.textContent = '');
+
+            if (nombre.length < 3) {
+                document.getElementById('error-nombre').textContent = 'El nombre debe tener al menos 3 caracteres';
+                valido = false;
+            }
+
+            if (!email.includes('@')) {
+                document.getElementById('error-email').textContent = 'Ingresa un correo válido';
+                valido = false;
+            }
+
+            if (usuario.length < 3) {
+                document.getElementById('error-usuario').textContent = 'El usuario debe tener al menos 3 caracteres';
+                valido = false;
+            }
+
+            if (password.length < 6) {
+                document.getElementById('error-password').textContent = 'La contraseña debe tener al menos 6 caracteres';
+                valido = false;
+            }
+
+            if (password !== confirmPassword) {
+                document.getElementById('error-confirm').textContent = 'Las contraseñas no coinciden';
+                valido = false;
+            }
+
+            if (!terminos) {
+                document.getElementById('error-terminos').textContent = 'Debes aceptar los términos y condiciones';
+                valido = false;
+            }
+
+            if (valido) {
+                alert('¡Registro exitoso! (Este es un formulario de demostración)');
+                this.reset();
+            }
+        });
+    </script>
 </body>
 </html>
